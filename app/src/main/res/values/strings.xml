@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Flock Manager ver0.01</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Flock Manager</string>
+    <string name="nav_header_subtitle">fjadrarocksa@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Hem</string>
+    <string name="menu_create_group">Skapa grupp</string>
+    <string name="menu_statistics">Statistik</string>
+    <string name="bird_type">Art</string>
+    <string name="breed">Ras</string>
+
+
+    <string name="hint_word">Word...</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="add_word">Add word</string>
+</resources>

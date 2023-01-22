@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bird_types">
+        <item>Höns</item>
+        <item>Anka</item>
+        <item>Vaktel</item>
+        <item>Kalkon</item>
+    </string-array>
+    <string-array name="chicken_breeds">
+        <item>Welsumer</item>
+        <item>Cream Legbar</item>
+        <item>Skånsk Blommehöna</item>
+        <item>Maran</item>
+    </string-array>
+    <string-array name="duck_breeds">
+        <item>Peking</item>
+        <item>Cayuga</item>
+        <item>Mysk</item>
+        <item>Löpanka</item>
+    </string-array>
+</resources>
