@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.flockmanager_a1.ChickenListAdapter
@@ -37,6 +39,8 @@ class CreateGroupsFragment : Fragment() {
     private val binding get() = _binding!!
     private val newWordActivityRequestCode = 1
 
+  //  private lateinit var createGroupsViewModel: CreateGroupsViewModel
+
     private val createGroupsViewModel: CreateGroupsViewModel by viewModels {
         CreateGroupsViewModelFactory((activity?.applicationContext as FlockManagerApplication).repository)
     }
@@ -46,7 +50,7 @@ class CreateGroupsFragment : Fragment() {
             result ->
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.getStringExtra(NewChickenActivity.EXTRA_REPLY)?.let { reply ->
-                val chicken = Chicken(3, reply, "apa")
+                val chicken = Chicken(3,reply, "apa")
                 createGroupsViewModel.insert(chicken)
             }
         }
@@ -81,13 +85,16 @@ class CreateGroupsFragment : Fragment() {
 
         ///
         val recyclerView = binding.recyclerview //findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = ChickenListAdapter()
+        val adapter = ChickenListAdapter(binding.root.context)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        // Get a new or existing ViewModel from the ViewModelProvider.
+        //createGroupsViewModel = ViewModelProvider(this)[CreateGroupsViewModel::class.java]
+
         createGroupsViewModel.allChickens.observe(viewLifecycleOwner)  { chickens ->
             // Update the cached copy of the words in the adapter.
-            chickens?.let { adapter.submitList(it) }
+            chickens?.let { adapter.setChickens(it) }
         }
 
         val fab = binding.fab

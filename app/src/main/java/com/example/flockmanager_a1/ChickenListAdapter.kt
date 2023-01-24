@@ -1,5 +1,6 @@
 package com.example.flockmanager_a1
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,35 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flockmanager_a1.db.Chicken
 
+class ChickenListAdapter internal constructor(
+    context: Context
+) : RecyclerView.Adapter<ChickenListAdapter.ChickenViewHolder>() {
+
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
+    private var chickens = emptyList<Chicken>() // Cached copy of words
+
+    inner class ChickenViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val chickenItemView: TextView = itemView.findViewById(R.id.textView)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChickenViewHolder {
+        val itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
+        return ChickenViewHolder(itemView)
+    }
+
+    override fun onBindViewHolder(holder: ChickenViewHolder, position: Int) {
+        val current = chickens[position]
+        holder.chickenItemView.text = current.birdType
+    }
+
+    internal fun setChickens(chickens: List<Chicken>) {
+        this.chickens = chickens
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount() = chickens.size
+}
+/*
 public class ChickenListAdapter
     : ListAdapter<Chicken, ChickenListAdapter.ChickenViewHolder>(ChickensComparator()) {
 
@@ -47,3 +77,4 @@ public class ChickenListAdapter
         }
     }
 }
+*/

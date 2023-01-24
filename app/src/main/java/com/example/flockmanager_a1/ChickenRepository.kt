@@ -19,10 +19,16 @@ class ChickenRepository(private val chickenDao: ChickenDao) {
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
     // off the main thread.
-    @Suppress("RedundantSuspendModifier")
+    //@Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insert(chicken: Chicken) {
         chickenDao.insert(chicken)
     }
+
+    @WorkerThread
+    suspend fun deleteAll() {
+        chickenDao.deleteAll()
+    }
+
 
 }

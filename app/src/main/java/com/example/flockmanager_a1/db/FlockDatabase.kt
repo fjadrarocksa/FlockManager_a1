@@ -30,9 +30,9 @@ public abstract class FlockDatabase : RoomDatabase() {
             chickenDao.deleteAll()
 
             // Add sample words.
-            var chicken = Chicken(1, "Chicken", "Blomme")
+            var chicken = Chicken(0,"Chicken2", "Blomme")
             chickenDao.insert(chicken)
-            chicken = Chicken(2, "Turkey", "Welsumer")
+            chicken = Chicken(1,"Turkey", "Welsumer")
             chickenDao.insert(chicken)
 
             // TODO: Add your own words!
