@@ -12,10 +12,8 @@ import android.view.View
 import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.ColorUtils
 import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
 import java.util.*
@@ -23,30 +21,34 @@ import java.util.*
 @SuppressLint("RestrictedApi")
 class AddNoteActivity : AppCompatActivity() {
 
-    private lateinit var addNoteBackground: RelativeLayout
-    private lateinit var addNoteWindowBg: LinearLayout
+    //private lateinit var addNoteBackground: RelativeLayout
+    //private lateinit var addNoteWindowBg: LinearLayout
+
+    private lateinit var addBirdBackground: ConstraintLayout
+    private lateinit var addBirdWindowBg: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_note)
+        setContentView(R.layout.activity_add_bird)
 
-        addNoteBackground = findViewById(R.id.add_note_background)
-        addNoteWindowBg = findViewById(R.id.add_note_window_bg)
+        addBirdBackground = findViewById(R.id.add_bird_background)
+        addBirdWindowBg = findViewById(R.id.add_bird_window_bg)
 
         setActivityStyle()
 
+        //val noteDateAdded = intent.getSerializableExtra("note_date_added", Date::class.java) as? Date
         val noteDateAdded = intent.getSerializableExtra("note_date_added") as? Date
         val noteTextToEdit = intent.getStringExtra("note_text")
 
-        val addNoteText = findViewById<TextView>(R.id.add_note_text)
-        addNoteText.text = noteTextToEdit ?: ""
+        //val addNoteText = findViewById<TextView>(R.id.add_note_text)
+        //addNoteText.text = noteTextToEdit ?: ""
 
-        val addNoteButton = findViewById<Button>(R.id.add_note_button)
-        addNoteButton.setOnClickListener {
+        val addBirdButton = findViewById<Button>(R.id.add_bird_button)
+        addBirdButton.setOnClickListener {
             // Return note text to the NotesActivity
             val data = Intent()
             data.putExtra("note_date_added", noteDateAdded)
-            data.putExtra("note_text", addNoteText.text.toString())
+            //data.putExtra("note_text", addNoteText.text.toString())
             setResult(Activity.RESULT_OK, data)
             // Close current window
             onBackPressed()
@@ -69,17 +71,17 @@ class AddNoteActivity : AppCompatActivity() {
         val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), Color.TRANSPARENT, alphaColor)
         colorAnimation.duration = 500 // milliseconds
         colorAnimation.addUpdateListener { animator ->
-            addNoteBackground.setBackgroundColor(animator.animatedValue as Int)
+            addBirdBackground.setBackgroundColor(animator.animatedValue as Int)
         }
         colorAnimation.start()
 
-        addNoteWindowBg.alpha = 0f
-        addNoteWindowBg.animate().alpha(1f).setDuration(500)
+        addBirdWindowBg.alpha = 0f
+        addBirdWindowBg.animate().alpha(1f).setDuration(500)
             .setInterpolator(DecelerateInterpolator()).start()
 
         // Close window when you tap on the dim background
-        addNoteBackground.setOnClickListener { onBackPressed() }
-        addNoteWindowBg.setOnClickListener { /* Prevent activity from closing when you tap on the popup's window background */ }
+        addBirdBackground.setOnClickListener { onBackPressed() }
+        addBirdWindowBg.setOnClickListener { /* Prevent activity from closing when you tap on the popup's window background */ }
     }
 
 
@@ -90,13 +92,13 @@ class AddNoteActivity : AppCompatActivity() {
         val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), alphaColor, Color.TRANSPARENT)
         colorAnimation.duration = 500 // milliseconds
         colorAnimation.addUpdateListener { animator ->
-            addNoteBackground.setBackgroundColor(
+            addBirdBackground.setBackgroundColor(
                 animator.animatedValue as Int
             )
         }
 
         // Fade animation for the Popup Window when you press the back button
-        addNoteWindowBg.animate().alpha(0f).setDuration(500).setInterpolator(
+        addBirdWindowBg.animate().alpha(0f).setDuration(500).setInterpolator(
             DecelerateInterpolator()
         ).start()
 
