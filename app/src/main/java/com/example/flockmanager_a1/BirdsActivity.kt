@@ -16,15 +16,15 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-class NotesActivity : AppCompatActivity() {
+class BirdsActivity : AppCompatActivity() {
 
-    private lateinit var adapter: NotesRVAdapter
+    private lateinit var adapter: BirdsRVAdapter
 
     private val noteDatabase by lazy { NoteDatabase.getDatabase(this).noteDao() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notes)
+        setContentView(R.layout.activity_birds)
 
         setRecyclerView()
 
@@ -32,10 +32,10 @@ class NotesActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerView() {
-        val notesRecyclerview = findViewById<RecyclerView>(R.id.notes_recyclerview)
-        notesRecyclerview.layoutManager = LinearLayoutManager(this)
-        notesRecyclerview.setHasFixedSize(true)
-        adapter = NotesRVAdapter()
+        val birdsRecyclerview = findViewById<RecyclerView>(R.id.birds_recyclerview)
+        birdsRecyclerview.layoutManager = LinearLayoutManager(this)
+        birdsRecyclerview.setHasFixedSize(true)
+        adapter = BirdsRVAdapter()
         adapter.setItemListener(object : RecyclerClickListener {
 
             // Tap the 'X' to delete the note.
@@ -53,14 +53,14 @@ class NotesActivity : AppCompatActivity() {
 
             // Tap the note to edit.
             override fun onItemClick(position: Int) {
-                val intent = Intent(this@NotesActivity, AddNoteActivity::class.java)
+                val intent = Intent(this@BirdsActivity, AddBirdActivity::class.java)
                 val notesList = adapter.currentList.toMutableList()
                 intent.putExtra("note_date_added", notesList[position].dateAdded)
                 intent.putExtra("note_text", notesList[position].noteText)
                 editNoteResultLauncher.launch(intent)
             }
         })
-        notesRecyclerview.adapter = adapter
+        birdsRecyclerview.adapter = adapter
     }
 
     private fun observeNotes() {
@@ -106,7 +106,7 @@ class NotesActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.add_note_menu_item) {
             // Open AddNoteActivity
-            val intent = Intent(this, AddNoteActivity::class.java)
+            val intent = Intent(this, AddBirdActivity::class.java)
             newNoteResultLauncher.launch(intent)
             return true
         }

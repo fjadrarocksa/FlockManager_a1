@@ -11,7 +11,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
-import android.widget.Button
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.ColorUtils
@@ -19,14 +19,16 @@ import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
 import java.util.*
 
 @SuppressLint("RestrictedApi")
-class AddNoteActivity : AppCompatActivity() {
+class AddBirdActivity : AppCompatActivity() {
 
     //private lateinit var addNoteBackground: RelativeLayout
     //private lateinit var addNoteWindowBg: LinearLayout
 
+
     private lateinit var addBirdBackground: ConstraintLayout
     private lateinit var addBirdWindowBg: ConstraintLayout
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_bird)
@@ -43,12 +45,47 @@ class AddNoteActivity : AppCompatActivity() {
         //val addNoteText = findViewById<TextView>(R.id.add_note_text)
         //addNoteText.text = noteTextToEdit ?: ""
 
+        val birdBreedSpinner: Spinner = findViewById<Spinner>(R.id.breed_spinner)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.chicken_breeds,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            birdBreedSpinner.adapter = adapter
+        }
+        /*
+        birdBreedSpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View, position: Int, id: Long
+            ) {
+//                Toast.makeText(this@MainActivity,
+//                    getString(R.string.selected_item) + " " +
+//                            "" + languages[position], Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // write code to perform some action
+            }
+        }
+         */
+
+        val data = Intent()
+        data.putExtra("note_date_added", noteDateAdded)
+        //data.putExtra("note_text", addNoteText.text.toString())
+        setResult(Activity.RESULT_OK, data)
+
         val addBirdButton = findViewById<Button>(R.id.add_bird_button)
         addBirdButton.setOnClickListener {
             // Return note text to the NotesActivity
             val data = Intent()
             data.putExtra("note_date_added", noteDateAdded)
-            //data.putExtra("note_text", addNoteText.text.toString())
+            data.putExtra("note_text",birdBreedSpinner.selectedItem.toString())
+                //addNoteText.text.toString())
             setResult(Activity.RESULT_OK, data)
             // Close current window
             onBackPressed()

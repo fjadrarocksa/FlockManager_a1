@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.flockmanager_a1.db.Note
 
 
-class NotesRVAdapter : ListAdapter<Note, NotesRVAdapter.NoteHolder>(DiffCallback()) {
+class BirdsRVAdapter : ListAdapter<Note, BirdsRVAdapter.BirdHolder>(DiffCallback()) {
 
-    class NoteHolder(view: View) : RecyclerView.ViewHolder(view)
+    class BirdHolder(view: View) : RecyclerView.ViewHolder(view)
 
     private lateinit var listener: RecyclerClickListener
     fun setItemListener(listener: RecyclerClickListener) {
@@ -22,25 +22,25 @@ class NotesRVAdapter : ListAdapter<Note, NotesRVAdapter.NoteHolder>(DiffCallback
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BirdHolder {
         val v =
             LayoutInflater.from(parent.context).inflate(R.layout.notes_row, parent, false)
-        val noteHolder = NoteHolder(v)
+        val birdHolder = BirdHolder(v)
 
-        val noteDelete = noteHolder.itemView.findViewById<ImageView>(R.id.note_delete)
+        val noteDelete = birdHolder.itemView.findViewById<ImageView>(R.id.note_delete)
         noteDelete.setOnClickListener {
-            listener.onItemRemoveClick(noteHolder.adapterPosition)
+            listener.onItemRemoveClick(birdHolder.adapterPosition)
         }
 
-        val note = noteHolder.itemView.findViewById<CardView>(R.id.note)
+        val note = birdHolder.itemView.findViewById<CardView>(R.id.note)
         note.setOnClickListener {
-            listener.onItemClick(noteHolder.adapterPosition)
+            listener.onItemClick(birdHolder.adapterPosition)
         }
 
-        return noteHolder
+        return birdHolder
     }
 
-    override fun onBindViewHolder(holder: NoteHolder, position: Int) {
+    override fun onBindViewHolder(holder: BirdHolder, position: Int) {
         val currentItem = getItem(position)
         val noteText = holder.itemView.findViewById<TextView>(R.id.note_text)
         noteText.text = currentItem.noteText

@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NotesActivity">
+    tools:context=".BirdsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notes_recyclerview"
+        android:id="@+id/birds_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"/>
