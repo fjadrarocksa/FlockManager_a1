@@ -6,7 +6,7 @@
     android:background="@color/colorPrimary">
 
     <ImageView
-        android:id="@+id/note_delete"
+        android:id="@+id/chicken_delete"
         android:layout_width="14dp"
         android:layout_height="14dp"
         android:layout_alignParentEnd="true"
@@ -18,7 +18,7 @@
         app:tint="@color/colorPrimaryDark" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/note"
+        android:id="@+id/cardview_breed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -31,13 +31,26 @@
         app:cardMaxElevation="0dp"
         app:cardPreventCornerOverlap="false">
 
-        <TextView
-            android:id="@+id/note_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Lorem ipsum"
-            android:textColor="@android:color/white" />
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:id="@+id/textview_breed"
+                    android:layout_width="179dp"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Welsumer"
+                    android:textColor="@android:color/white"/>
+            <TextView
+                    android:id="@+id/textview_sex"
+                    android:layout_width="151dp"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Sex: "
+                    android:textColor="@android:color/white"/>
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

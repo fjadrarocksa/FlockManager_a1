@@ -13,13 +13,13 @@
 
     <fragment
             android:id="@+id/nav_create_groups"
-            android:name="com.example.flockmanager_a1.ui.creategroups.CreateGroupsFragment"
+            android:name="com.example.flockmanager_a1.ui.creategroups.FlocksFragment"
             android:label="@string/app_name"
-            tools:layout="@layout/fragment_create_groups"/>
+            tools:layout="@layout/fragment_flocks"/>
 
-    <fragment
+    <activity
             android:id="@+id/nav_statistics"
-            android:name="com.example.flockmanager_a1.ui.statistics.StatisticsFragment"
+            android:name="com.example.flockmanager_a1.BirdsActivity"
             android:label="@string/menu_statistics"
-            tools:layout="@layout/fragment_statistics"/>
+            tools:layout="@layout/activity_birds"/>
 </navigation>

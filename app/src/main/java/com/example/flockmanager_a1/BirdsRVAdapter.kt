@@ -9,10 +9,10 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.flockmanager_a1.db.Note
+import com.example.flockmanager_a1.db.Chicken
 
 
-class BirdsRVAdapter : ListAdapter<Note, BirdsRVAdapter.BirdHolder>(DiffCallback()) {
+class BirdsRVAdapter : ListAdapter<Chicken, BirdsRVAdapter.BirdHolder>(DiffCallback()) {
 
     class BirdHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -24,15 +24,15 @@ class BirdsRVAdapter : ListAdapter<Note, BirdsRVAdapter.BirdHolder>(DiffCallback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BirdHolder {
         val v =
-            LayoutInflater.from(parent.context).inflate(R.layout.notes_row, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.chickens_row, parent, false)
         val birdHolder = BirdHolder(v)
 
-        val noteDelete = birdHolder.itemView.findViewById<ImageView>(R.id.note_delete)
+        val noteDelete = birdHolder.itemView.findViewById<ImageView>(R.id.chicken_delete)
         noteDelete.setOnClickListener {
             listener.onItemRemoveClick(birdHolder.adapterPosition)
         }
 
-        val note = birdHolder.itemView.findViewById<CardView>(R.id.note)
+        val note = birdHolder.itemView.findViewById<CardView>(R.id.cardview_breed)
         note.setOnClickListener {
             listener.onItemClick(birdHolder.adapterPosition)
         }
@@ -42,15 +42,17 @@ class BirdsRVAdapter : ListAdapter<Note, BirdsRVAdapter.BirdHolder>(DiffCallback
 
     override fun onBindViewHolder(holder: BirdHolder, position: Int) {
         val currentItem = getItem(position)
-        val noteText = holder.itemView.findViewById<TextView>(R.id.note_text)
-        noteText.text = currentItem.noteText
+        val breedText = holder.itemView.findViewById<TextView>(R.id.textview_breed)
+        val sexText = holder.itemView.findViewById<TextView>(R.id.textview_sex)
+        breedText.text = currentItem.breedText
+        sexText.text = currentItem.sexText
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Note>() {
-        override fun areItemsTheSame(oldItem: Note, newItem: Note) =
+    class DiffCallback : DiffUtil.ItemCallback<Chicken>() {
+        override fun areItemsTheSame(oldItem: Chicken, newItem: Chicken) =
             oldItem.dateAdded == newItem.dateAdded
 
-        override fun areContentsTheSame(oldItem: Note, newItem: Note) =
+        override fun areContentsTheSame(oldItem: Chicken, newItem: Chicken) =
             oldItem == newItem
     }
 }

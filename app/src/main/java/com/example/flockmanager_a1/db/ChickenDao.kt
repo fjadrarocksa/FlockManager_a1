@@ -5,23 +5,17 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ChickenDao {
-    @Query("SELECT * FROM chickens")
-    fun getAll(): Flow<List<Chicken>>
-
-    @Insert
-    fun insertAll(vararg chickens: Chicken)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(chicken: Chicken)
+    suspend fun addChicken(chicken: Chicken)
 
-    @Query("DELETE FROM chickens")
-    suspend fun deleteAll()
-
-    /*
-    @Delete
-    suspend fun delete(chicken: Chicken)
+    @Query("SELECT * FROM chickens ORDER BY date_added DESC")
+    fun getAllChickens(): Flow<List<Chicken>>
 
     @Update
-     */
+    suspend fun updateChicken(chicken: Chicken)
+
+    @Delete
+    suspend fun deleteChicken(chicken: Chicken)
 
 }

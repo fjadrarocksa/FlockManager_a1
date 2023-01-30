@@ -21,8 +21,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flockmanager_a1.databinding.ActivityMainBinding
 import com.example.flockmanager_a1.db.Chicken
-import com.example.flockmanager_a1.ui.creategroups.CreateGroupsViewModel
-import com.example.flockmanager_a1.ui.creategroups.CreateGroupsViewModelFactory
+//import com.example.flockmanager_a1.ui.creategroups.CreateGroupsViewModel
+//import com.example.flockmanager_a1.ui.creategroups.CreateGroupsViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -64,3 +64,4 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+

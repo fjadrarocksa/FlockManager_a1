@@ -3,7 +3,7 @@ package com.example.flockmanager_a1.db
 import androidx.room.TypeConverter
 import java.util.*
 
-class NoteConverters {
+class DateConverters {
     @TypeConverter
     fun fromTimestamp(value: Long?): Date? {
         return value?.let { Date(it) }

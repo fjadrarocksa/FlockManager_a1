@@ -12,6 +12,10 @@
         <item>Skånsk Blommehöna</item>
         <item>Maran</item>
     </string-array>
+    <string-array name="chicken_sex">
+        <item>Hen</item>
+        <item>Rooster</item>
+    </string-array>
     <string-array name="duck_breeds">
         <item>Peking</item>
         <item>Cayuga</item>

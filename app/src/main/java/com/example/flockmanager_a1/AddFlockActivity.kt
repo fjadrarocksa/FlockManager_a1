@@ -7,7 +7,9 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
@@ -16,49 +18,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.ColorUtils
 import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
+import com.google.android.material.textfield.TextInputEditText
 import java.util.*
 
 @SuppressLint("RestrictedApi")
-class AddBirdActivity : AppCompatActivity() {
+class AddFlockActivity : AppCompatActivity() {
 
-    private lateinit var addBirdBackground: ConstraintLayout
-    private lateinit var addBirdWindowBg: ConstraintLayout
+    private lateinit var addFlockBackground: ConstraintLayout
+    private lateinit var addFlockWindowBg: ConstraintLayout
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_bird)
+        setContentView(R.layout.activity_add_flock)
 
-        addBirdBackground = findViewById(R.id.add_bird_background)
-        addBirdWindowBg = findViewById(R.id.add_bird_window_bg)
+        addFlockBackground = findViewById(R.id.add_bird_background)
+        addFlockWindowBg = findViewById(R.id.add_bird_window_bg)
 
         setActivityStyle()
 
         val dateAdded = intent.getSerializableExtra("date_added") as? Date
-        val birdBreedSpinner: Spinner = findViewById<Spinner>(R.id.breed_spinner)
+        val flockName: TextInputEditText = findViewById<TextInputEditText>(R.id.flock_name_input)
 
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.chicken_breeds,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            birdBreedSpinner.adapter = adapter
-        }
-
-        val birdSexSpinner: Spinner = findViewById<Spinner>(R.id.sex_spinner)
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.chicken_sex,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            birdSexSpinner.adapter = adapter
-        }
         // TODO - Is this needed?
         /*
         val data = Intent()
@@ -66,19 +47,17 @@ class AddBirdActivity : AppCompatActivity() {
         setResult(Activity.RESULT_OK, data)
          */
 
-        val addBirdButton = findViewById<Button>(R.id.create_flock_button)
-        addBirdButton.setOnClickListener {
-            // Return note text to the NotesActivity
+        val addFlockButton = findViewById<Button>(R.id.create_flock_button)
+        addFlockButton.setOnClickListener {
             val data = Intent()
             data.putExtra("date_added", dateAdded)
-            data.putExtra("breed", birdBreedSpinner.selectedItem.toString())
-            data.putExtra("sex", birdSexSpinner.selectedItem.toString())
-            data.putExtra("group_id", "group1")
-
+            data.putExtra("flock_name", flockName.toString())
+            Log.w("AddFlockActivity", "addFlockButton.setOnClickListener")
             setResult(Activity.RESULT_OK, data)
             // Close current window
             onBackPressed()
         }
+
     }
 
     private fun setActivityStyle() {
@@ -97,17 +76,17 @@ class AddBirdActivity : AppCompatActivity() {
         val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), Color.TRANSPARENT, alphaColor)
         colorAnimation.duration = 500 // milliseconds
         colorAnimation.addUpdateListener { animator ->
-            addBirdBackground.setBackgroundColor(animator.animatedValue as Int)
+            addFlockBackground.setBackgroundColor(animator.animatedValue as Int)
         }
         colorAnimation.start()
 
-        addBirdWindowBg.alpha = 0f
-        addBirdWindowBg.animate().alpha(1f).setDuration(500)
+        addFlockWindowBg.alpha = 0f
+        addFlockWindowBg.animate().alpha(1f).setDuration(500)
             .setInterpolator(DecelerateInterpolator()).start()
 
         // Close window when you tap on the dim background
-        addBirdBackground.setOnClickListener { onBackPressed() }
-        addBirdWindowBg.setOnClickListener { /* Prevent activity from closing when you tap on the popup's window background */ }
+        addFlockBackground.setOnClickListener { onBackPressed() }
+        addFlockWindowBg.setOnClickListener { /* Prevent activity from closing when you tap on the popup's window background */ }
     }
 
 
@@ -118,13 +97,13 @@ class AddBirdActivity : AppCompatActivity() {
         val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), alphaColor, Color.TRANSPARENT)
         colorAnimation.duration = 500 // milliseconds
         colorAnimation.addUpdateListener { animator ->
-            addBirdBackground.setBackgroundColor(
+            addFlockBackground.setBackgroundColor(
                 animator.animatedValue as Int
             )
         }
 
         // Fade animation for the Popup Window when you press the back button
-        addBirdWindowBg.animate().alpha(0f).setDuration(500).setInterpolator(
+        addFlockWindowBg.animate().alpha(0f).setDuration(500).setInterpolator(
             DecelerateInterpolator()
         ).start()
 

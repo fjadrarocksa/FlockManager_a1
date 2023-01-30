@@ -25,48 +25,21 @@
                 android:layout_height="48dp"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="Breed"
+                android:text="Flock name: "
                 android:textAlignment="textStart"
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="24dp" android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/add_note_title2"/>
-        <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/add_note_title2"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Sex"
-                android:textAlignment="viewStart"
-                android:textColor="@color/colorAccent"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/flock_name_text_view"
-                app:layout_constraintEnd_toEndOf="@+id/flock_name_text_view"
-                app:layout_constraintStart_toStartOf="@+id/flock_name_text_view" app:layout_constraintHorizontal_bias="0.0"/>
-        <Spinner
-                android:layout_width="145dp"
-                android:layout_height="48dp" android:id="@+id/breed_spinner"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/flock_name_text_view" android:layout_marginTop="24dp"/>
-        <Spinner
-                android:layout_width="145dp"
-                android:layout_height="48dp" android:id="@+id/sex_spinner"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/flock_name_text_view"
-                app:layout_constraintHorizontal_bias="0.478" app:layout_constraintTop_toBottomOf="@+id/breed_spinner"/>
+        />
         <Button
                 android:id="@+id/create_flock_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="211dp"
                 android:layout_height="67dp"
                 android:background="@drawable/note_button_bg_layout"
-                android:text="Add to flock"
+                android:text="Create flock"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
@@ -74,6 +47,16 @@
                 tools:ignore="TouchTargetSizeCheck"
                 app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="28dp"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="166dp"
+                android:layout_height="57dp" tools:layout_editor_absoluteX="118dp"
+                tools:layout_editor_absoluteY="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="hint" android:id="@+id/flock_name_input"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
